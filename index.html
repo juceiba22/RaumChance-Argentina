@@ -1058,6 +1058,78 @@
         padding: 20px 16px;
       }
     }
+
+    /* ==========================================
+       12. MODAL DE CONFIRMACIÓN PREMIUM
+       ========================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-card {
+      background-color: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      max-width: 460px;
+      width: calc(100% - 32px);
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: scale(1);
+    }
+
+    .modal-icon-wrapper {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px auto;
+    }
+
+    .modal-icon-wrapper.success {
+      background-color: rgba(5, 150, 105, 0.1);
+    }
+
+    .modal-icon-wrapper.error {
+      background-color: rgba(239, 68, 68, 0.1);
+    }
+
+    .modal-title {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .modal-message {
+      font-size: 0.95rem;
+      color: var(--text-main);
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
   </style>
 </head>
 <body>
@@ -1529,6 +1601,18 @@
   </footer>
 
   <!-- ==========================================
+       MODAL DE CONFIRMACIÓN (PREMIUM)
+       ========================================== -->
+  <div id="custom-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-icon-wrapper" id="modal-icon-container"></div>
+      <h3 class="modal-title" id="modal-title-text"></h3>
+      <p class="modal-message" id="modal-message-text"></p>
+      <button class="btn btn-primary" onclick="cerrarModal()" style="width: 100%;">Entendido</button>
+    </div>
+  </div>
+
+  <!-- ==========================================
        SCRIPT DE INTERACCIÓN DE PRUEBA
        ========================================== -->
   <script>
@@ -1602,18 +1686,60 @@
         const resultado = await respuesta.json();
 
         if (respuesta.ok && resultado.success) {
-          alert("¡Muchas gracias! Tu solicitud de diagnóstico ha sido registrada con éxito. Un consultor gubernamental de RaumChance KI se contactará a tu correo oficial en las próximas 24 horas hábiles.");
+          mostrarModal(
+            true, 
+            "¡Solicitud Registrada!", 
+            "¡Muchas gracias! Tu solicitud de diagnóstico ha sido registrada con éxito. Un consultor gubernamental de RaumChance KI se contactará a tu correo oficial en las próximas 24 horas hábiles."
+          );
           event.target.reset();
         } else {
           throw new Error(resultado.error || "Error en el servidor");
         }
       } catch (error) {
         console.error('Error de red/servidor:', error);
-        alert("Hubo un problema al enviar tu formulario de diagnóstico. Por favor, intentá nuevamente o escribinos a contacto@raumchance.com");
+        mostrarModal(
+          false, 
+          "Error de Envío", 
+          "Hubo un problema al enviar tu formulario de diagnóstico. Por favor, intentá nuevamente o escribinos a contacto@raumchance.com"
+        );
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = originalText;
       }
+    }
+
+    // Funciones del Modal Premium
+    function mostrarModal(esExito, titulo, mensaje) {
+      const modal = document.getElementById('custom-modal');
+      const iconContainer = document.getElementById('modal-icon-container');
+      const titleText = document.getElementById('modal-title-text');
+      const messageText = document.getElementById('modal-message-text');
+
+      // Limpiar clases anteriores del icono
+      iconContainer.className = 'modal-icon-wrapper';
+
+      if (esExito) {
+        iconContainer.classList.add('success');
+        iconContainer.innerHTML = `
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent);"><polyline points="20 6 9 17 4 12"/></svg>
+        `;
+      } else {
+        iconContainer.classList.add('error');
+        iconContainer.innerHTML = `
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="color: #EF4444;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        `;
+      }
+
+      titleText.textContent = titulo;
+      messageText.textContent = mensaje;
+
+      // Activar Modal
+      modal.classList.add('active');
+    }
+
+    function cerrarModal() {
+      const modal = document.getElementById('custom-modal');
+      modal.classList.remove('active');
     }
   </script>
 </body>
