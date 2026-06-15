@@ -1572,11 +1572,48 @@
       }, 300);
     }
 
-    // Simulación de Envío de Formulario
-    function enviarDiagnostico(event) {
+    // Envío del Formulario a la API
+    async function enviarDiagnostico(event) {
       event.preventDefault();
-      alert("¡Muchas gracias! Tu solicitud de diagnóstico ha sido registrada con éxito. Un consultor gubernamental de RaumChance KI se contactará a tu correo oficial en las próximas 24 horas hábiles.");
-      event.target.reset();
+      
+      const submitBtn = event.target.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      
+      const datos = {
+        nombre: document.getElementById('nombre').value,
+        jurisdiccion: document.getElementById('jurisdiccion').value,
+        email: document.getElementById('contacto-email').value,
+        tramite: document.getElementById('tramite').value
+      };
+
+      // Cambiar estado del botón a "Enviando..."
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Procesando solicitud...";
+
+      try {
+        const respuesta = await fetch('/api/contacto', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(datos)
+        });
+
+        const resultado = await respuesta.json();
+
+        if (respuesta.ok && resultado.success) {
+          alert("¡Muchas gracias! Tu solicitud de diagnóstico ha sido registrada con éxito. Un consultor gubernamental de RaumChance KI se contactará a tu correo oficial en las próximas 24 horas hábiles.");
+          event.target.reset();
+        } else {
+          throw new Error(resultado.error || "Error en el servidor");
+        }
+      } catch (error) {
+        console.error('Error de red/servidor:', error);
+        alert("Hubo un problema al enviar tu formulario de diagnóstico. Por favor, intentá nuevamente o escribinos a contacto@raumchance.com");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
     }
   </script>
 </body>
