@@ -9,11 +9,11 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { nombre, jurisdiccion, email, tramite } = req.body;
+    const { nombre, jurisdiccion, email, telefono, tramite } = req.body;
 
     // Validación básica de campos obligatorios
-    if (!nombre || !jurisdiccion || !email) {
-      return res.status(400).json({ error: 'Faltan campos obligatorios: Nombre, Jurisdicción y Correo Electrónico.' });
+    if (!nombre || !jurisdiccion || !email || !telefono) {
+      return res.status(400).json({ error: 'Faltan campos obligatorios: Nombre, Jurisdicción, Correo y Teléfono.' });
     }
 
     // Registro del Lead en los logs del servidor
@@ -21,6 +21,7 @@ export default async function handler(req, res) {
       nombre,
       jurisdiccion,
       email,
+      telefono,
       tramite: tramite || 'No especificado',
       fecha: new Date().toISOString()
     });
@@ -44,6 +45,7 @@ export default async function handler(req, res) {
             <p><strong>Nombre y Cargo:</strong> ${nombre}</p>
             <p><strong>Municipio o Jurisdicción:</strong> ${jurisdiccion}</p>
             <p><strong>Correo Electrónico Oficial:</strong> ${email}</p>
+            <p><strong>Teléfono de Contacto:</strong> ${telefono}</p>
             <p><strong>Trámite Crítico Seleccionado:</strong> ${tramite || 'No especificado'}</p>
             <p><em>Enviado de forma segura a través del servidor de Vercel.</em></p>
           `

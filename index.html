@@ -1567,6 +1567,10 @@
                 <input class="form-input" type="email" id="contacto-email" placeholder="ejemplo@municipio.gob.ar" required>
               </div>
               <div class="form-group">
+                <label class="form-label" for="telefono">Teléfono de Contacto</label>
+                <input class="form-input" type="tel" id="telefono" placeholder="Ej. +54 9 11 1234-5678" required>
+              </div>
+              <div class="form-group">
                 <label class="form-label" for="tramite">Trámite Crítico a Resolver</label>
                 <input class="form-input" type="text" id="tramite" placeholder="Ej. Habilitaciones comerciales / Ayudas Sociales">
               </div>
@@ -1667,6 +1671,7 @@
         nombre: document.getElementById('nombre').value,
         jurisdiccion: document.getElementById('jurisdiccion').value,
         email: document.getElementById('contacto-email').value,
+        telefono: document.getElementById('telefono').value,
         tramite: document.getElementById('tramite').value
       };
 
