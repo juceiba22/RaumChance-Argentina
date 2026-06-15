@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RaumChance KI - Inteligencia Artificial Soberana para la Gestión Pública</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Hubs de Inteligencia Artificial soberanos para acelerar trámites, ayudas sociales y habilitaciones en municipios y provincias de Argentina. El humano decide, la IA potencia.">
+  <meta name="keywords" content="GovTech, Inteligencia Artificial, Municipios, Gestión Pública, Desburocratización, Argentina, Modernización">
+  <meta name="author" content="RaumChance KI">
+  
+  <!-- Google Fonts: Inter (Tech/Modern) & Lora (Editorial/Institutional) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- CSS Styles -->
+  <style>
+    /* ==========================================
+       1. VARIABLES Y DISEÑO DEL SISTEMA
+       ========================================== */
+    :root {
+      /* Colores Institucionales */
+      --primary: #0F2042;       /* Azul Navy Gob */
+      --primary-light: #1E3A8A; /* Azul Moderno */
+      --secondary: #3B82F6;     /* Azul Tecnológico */
+      --accent: #059669;        /* Verde Esperanza / Impacto */
+      --accent-light: #34D399;  /* Verde Claro */
+      --warning: #D97706;       /* Amarillo Alerta/Firma */
+      --warning-light: #FBBF24;
+      
+      /* Fondos y Neutros */
+      --bg-main: #F8FAFC;       /* Gris muy suave */
+      --bg-white: #FFFFFF;
+      --bg-dark: #0B132B;       /* Footer Navy Oscuro */
+      --text-main: #334155;     /* Slate 700 */
+      --text-dark: #0F172A;     /* Slate 900 */
+      --text-light: #E2E8F0;    /* Slate 200 */
+      --border: #E2E8F0;        /* Slate 200 */
+      
+      /* Tipografía */
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-serif: 'Lora', Georgia, serif;
+      
+      /* Estructura */
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --shadow-sm: 0 4px 6px -1px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.05);
+      --shadow-lg: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.05);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ==========================================
+       2. RESET Y ESTILOS BASE
+       ========================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      color: var(--text-dark);
+      font-weight: 700;
+    }
+
+    p {
+      color: var(--text-main);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button, .btn {
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-family: var(--font-sans);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      font-weight: 600;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ==========================================
+       3. BOTONES Y COMPONENTES REUTILIZABLES
+       ========================================== */
+    .btn-primary {
+      background-color: var(--accent);
+      color: var(--bg-white);
+      padding: 16px 32px;
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      box-shadow: 0 4px 14px rgba(5, 150, 105, 0.4);
+      border: 1px solid var(--accent);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-light);
+      border-color: var(--accent-light);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(5, 150, 105, 0.5);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--primary-light);
+      border: 2px solid var(--primary-light);
+      padding: 14px 28px;
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(30, 58, 138, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .badge-soberania {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: rgba(30, 90, 180, 0.1);
+      color: var(--primary-light);
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 20px;
+      border: 1px solid rgba(30, 90, 180, 0.15);
+    }
+
+    .section-title-wrapper {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 2.25rem;
+      color: var(--primary);
+      margin-bottom: 16px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background-color: var(--accent);
+      border-radius: 2px;
+    }
+
+    .section-subtitle {
+      font-size: 1.125rem;
+      color: var(--text-main);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* ==========================================
+       4. BARRA DE NAVEGACIÓN (HEADER)
+       ========================================== */
+    .navbar {
+      background-color: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: var(--transition);
+    }
+
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 1.35rem;
+      color: var(--primary);
+    }
+
+    .logo span {
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .navbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* ==========================================
+       5. HERO SECTION
+       ========================================== */
+    .hero {
+      position: relative;
+      background: radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.08) 0%, rgba(248, 250, 252, 0) 50%),
+                  linear-gradient(180deg, var(--bg-white) 0%, var(--bg-main) 100%);
+      padding: 100px 0 120px 0;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Patrón de cuadrícula decorativo sutil */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(#e2e8f0 1.5px, transparent 1.5px);
+      background-size: 32px 32px;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-content {
+      max-width: 650px;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: 3.25rem;
+      line-height: 1.15;
+      color: var(--primary);
+      margin-bottom: 24px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-main);
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    /* Tarjeta Interactiva del Hero (Simulación de Firma Digital) */
+    .hero-card-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .signature-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .signature-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+    }
+
+    .signature-card-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary-light);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .signature-badge {
+      background-color: rgba(217, 119, 6, 0.1);
+      color: var(--warning);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .signature-card-body {
+      margin-bottom: 24px;
+    }
+
+    .signature-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+
+    .signature-label {
+      color: var(--text-muted);
+    }
+
+    .signature-value {
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .signature-card-footer {
+      background-color: var(--bg-main);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      border: 1px dashed var(--border);
+      text-align: center;
+    }
+
+    .signature-status-text {
+      font-size: 0.8rem;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+
+    .signature-btn {
+      background-color: var(--warning);
+      color: var(--bg-white);
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .signature-btn:hover {
+      background-color: #b45309;
+    }
+
+    /* ==========================================
+       6. EL MANIFIESTO
+       ========================================== */
+    .manifiesto {
+      padding: 100px 0;
+      background-color: var(--bg-white);
+      position: relative;
+    }
+
+    .manifiesto-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .manifiesto-card {
+      background-color: var(--bg-main);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 40px 32px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .manifiesto-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--secondary);
+    }
+
+    .manifiesto-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background-color: var(--primary-light);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .manifiesto-card:hover::before {
+      opacity: 1;
+    }
+
+    .manifiesto-icon-wrapper {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      background-color: rgba(30, 58, 138, 0.08);
+      color: var(--primary-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .manifiesto-card-title {
+      font-size: 1.35rem;
+      margin-bottom: 16px;
+      color: var(--primary);
+    }
+
+    .manifiesto-card-text {
+      font-size: 0.975rem;
+      line-height: 1.6;
+      color: var(--text-main);
+    }
+
+    /* ==========================================
+       7. MOTORES DE IMPACTO TERRITORIAL
+       ========================================== */
+    .motores {
+      padding: 100px 0;
+      background-color: var(--bg-main);
+    }
+
+    .motores-tabs-container {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .motores-nav {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+    }
+
+    .tab-button {
+      padding: 12px 24px;
+      font-size: 1rem;
+      color: var(--text-muted);
+      border-radius: 50px;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tab-button:hover {
+      color: var(--primary);
+      background-color: rgba(15, 32, 66, 0.05);
+    }
+
+    .tab-button.active {
+      color: var(--bg-white);
+      background-color: var(--primary);
+      font-weight: 600;
+    }
+
+    .tab-content {
+      display: none;
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 50px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tab-content.active {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .motor-info-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .motor-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: rgba(5, 150, 105, 0.1);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .motor-title {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: var(--primary);
+    }
+
+    .motor-desc {
+      font-size: 1.05rem;
+      margin-bottom: 30px;
+      line-height: 1.7;
+    }
+
+    /* Flujo del Motor */
+    .flow-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .flow-steps-wrapper {
+      margin-top: 10px;
+    }
+
+    .flow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      background-color: var(--bg-main);
+      border-left: 4px solid var(--border);
+      transition: var(--transition);
+    }
+
+    .flow-step:hover {
+      border-left-color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    .flow-step.human-gate {
+      border-left-color: var(--warning);
+      background-color: rgba(217, 119, 6, 0.03);
+    }
+
+    .flow-step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: var(--primary-light);
+      color: var(--bg-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .flow-step.human-gate .flow-step-num {
+      background-color: var(--warning);
+    }
+
+    .flow-step-title {
+      font-weight: 700;
+      color: var(--text-dark);
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+
+    .flow-step-text {
+      font-size: 0.875rem;
+      color: var(--text-main);
+    }
+
+    /* Panel de Vista Previa del Motor */
+    .motor-preview-panel {
+      background-color: var(--primary);
+      border-radius: var(--radius-md);
+      padding: 30px;
+      color: var(--bg-white);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+    }
+
+    .preview-badge {
+      background-color: rgba(255,255,255,0.1);
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .preview-item {
+      background-color: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .preview-item-title {
+      font-size: 0.85rem;
+      color: var(--secondary);
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .preview-item-val {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .preview-comparison-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: rgba(16, 185, 129, 0.2);
+      color: var(--accent-light);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      margin-top: 8px;
+    }
+
+    /* ==========================================
+       8. EL CAMINO CRÍTICO: PILOTO EN 30 DÍAS
+       ========================================== */
+    .camino {
+      padding: 100px 0;
+      background-color: var(--bg-white);
+      position: relative;
+    }
+
+    .camino-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      position: relative;
+      margin-top: 60px;
+    }
+
+    .camino-grid::before {
+      content: '';
+      position: absolute;
+      top: 50px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background-color: var(--border);
+      z-index: 1;
+    }
+
+    .camino-step {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .camino-badge {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: var(--bg-main);
+      border: 4px solid var(--bg-white);
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px auto;
+      font-size: 1.75rem;
+      color: var(--primary-light);
+      transition: var(--transition);
+    }
+
+    .camino-step:hover .camino-badge {
+      background-color: var(--primary-light);
+      color: var(--bg-white);
+      transform: scale(1.1);
+    }
+
+    .camino-step-day {
+      display: inline-block;
+      background-color: var(--accent);
+      color: var(--bg-white);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 50px;
+      margin-bottom: 12px;
+    }
+
+    .camino-step-title {
+      font-size: 1.25rem;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .camino-step-text {
+      font-size: 0.9rem;
+      color: var(--text-main);
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    /* ==========================================
+       9. MÉTRICAS DE ÉXITO CIUDADANO
+       ========================================== */
+    .metricas {
+      padding: 100px 0;
+      background-color: var(--primary);
+      color: var(--bg-white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metricas::before {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background-color: rgba(59, 130, 246, 0.1);
+      border-radius: 50%;
+      top: -100px;
+      right: -100px;
+      pointer-events: none;
+    }
+
+    .metricas-title {
+      font-family: var(--font-serif);
+      font-size: 2.25rem;
+      text-align: center;
+      color: var(--bg-white);
+      margin-bottom: 60px;
+    }
+
+    .metricas-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .metricas-card {
+      background-color: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-md);
+      padding: 40px;
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .metricas-card:hover {
+      background-color: rgba(255, 255, 255, 0.08);
+      transform: translateY(-5px);
+    }
+
+    .metricas-num {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--accent-light);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .metricas-card.warning .metricas-num {
+      color: var(--warning-light);
+    }
+
+    .metricas-card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .metricas-card-text {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* ==========================================
+       10. CONTACTO Y FOOTER
+       ========================================== */
+    .cta-final {
+      padding: 100px 0;
+      background: linear-gradient(135deg, var(--bg-main) 0%, var(--bg-white) 100%);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cta-final-box {
+      background-color: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 60px;
+      box-shadow: var(--shadow-lg);
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .cta-final-title {
+      font-family: var(--font-serif);
+      font-size: 2.25rem;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+
+    .cta-final-text {
+      font-size: 1.1rem;
+      color: var(--text-main);
+      margin-bottom: 30px;
+    }
+
+    .cta-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .form-input {
+      padding: 14px 18px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      transition: var(--transition);
+      background-color: var(--bg-main);
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary-light);
+      background-color: var(--bg-white);
+      box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.15);
+    }
+
+    .footer {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      padding: 60px 0 30px 0;
+      font-size: 0.9rem;
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 40px;
+      margin-bottom: 30px;
+    }
+
+    .footer-logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--bg-white);
+    }
+
+    .footer-logo span {
+      color: var(--accent-light);
+    }
+
+    .footer-tagline {
+      max-width: 450px;
+      color: rgba(255, 255, 255, 0.6);
+      font-style: italic;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.8rem;
+    }
+
+    /* ==========================================
+       11. RESPONSIVIDAD (MOBILE-FIRST)
+       ========================================== */
+    @media (max-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        text-align: center;
+      }
+      
+      .hero-content {
+        margin: 0 auto;
+      }
+
+      .hero-cta-group {
+        justify-content: center;
+      }
+
+      .manifiesto-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .tab-content.active {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 30px;
+      }
+
+      .camino-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .camino-grid::before {
+        display: none;
+      }
+
+      .metricas-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .cta-final-box {
+        grid-template-columns: 1fr;
+        padding: 30px;
+      }
+
+      .footer-grid {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 60px 0 80px 0;
+      }
+
+      .hero-title {
+        font-size: 2.25rem;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+      }
+
+      .motores-nav {
+        flex-wrap: wrap;
+      }
+
+      .tab-button {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       BARRA DE NAVEGACIÓN
+       ========================================== -->
+  <header class="navbar">
+    <div class="container navbar-container">
+      <a href="#" class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent);"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        RaumChance <span>KI</span>
+      </a>
+      <div class="navbar-actions">
+        <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-main); display: flex; align-items: center; gap: 6px;">
+          <span style="display: inline-block; width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%;"></span>
+          Soberanía Digital
+        </span>
+        <a href="#contacto" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.85rem; border-radius: 4px;">Contacto</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================
+         SECCIÓN HERO
+         ========================================== -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="badge-soberania">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Infraestructura Local Segura
+          </div>
+          <h1 class="hero-title">Menos Burocracia, Más Respuestas: Inteligencia Artificial para una Gestión Pública Humana y Eficiente.</h1>
+          <p class="hero-subtitle">Transformamos la atención en tu municipio o provincia. Implementamos Hubs de IA soberanos que aceleran el procesamiento de trámites, ayudas sociales y habilitaciones. El vecino espera menos, la gestión resuelve más. La IA optimiza el trabajo pesado, pero la decisión final siempre es de una persona.</p>
+          <div class="hero-cta-group">
+            <a href="#contacto" class="btn btn-primary">Solicitar Diagnóstico de Procesos para mi Gestión</a>
+          </div>
+        </div>
+        
+        <div class="hero-card-container">
+          <!-- Tarjeta Interactiva: El Humano decide, la IA potencia -->
+          <div class="signature-card">
+            <div class="signature-card-header">
+              <span class="signature-card-title">Expediente N° 2026-894-A</span>
+              <span class="signature-badge">Listo para Firma</span>
+            </div>
+            <div class="signature-card-body">
+              <div class="signature-row">
+                <span class="signature-label">Trámite:</span>
+                <span class="signature-value">Habilitación de Comercio</span>
+              </div>
+              <div class="signature-row">
+                <span class="signature-label">Solicitante:</span>
+                <span class="signature-value">Panadería "La Unión"</span>
+              </div>
+              <div class="signature-row">
+                <span class="signature-label">Análisis IA RaumChance:</span>
+                <span class="signature-value" style="color: var(--accent); display: flex; align-items: center; gap: 4px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  100% Cumplido
+                </span>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 12px; padding: 10px; background-color: var(--bg-main); border-radius: 4px;">
+                La IA procesó las 4 ordenanzas vigentes y el plano catastral. Ninguna anomalía detectada. Borrador técnico de resolución generado.
+              </p>
+            </div>
+            <div class="signature-card-footer">
+              <div class="signature-status-text">Firma y aprobación del Secretario de Producción</div>
+              <button class="btn signature-btn" onclick="firmarTramite(this)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                <span>Validar y Firmar</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         EL MANIFIESTO: "EL HUMANO GOBIERNA, LA IA POTENCIA"
+         ========================================== -->
+    <section class="manifiesto">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <h2 class="section-title">El Humano Gobierna, la IA Potencia</h2>
+          <p class="section-subtitle">Diseñamos tecnología con soberanía que no reemplaza el criterio del funcionario, sino que lo blinda y desburocratiza el proceso administrativo.</p>
+        </div>
+        
+        <div class="manifiesto-grid">
+          <!-- Card 1 -->
+          <div class="manifiesto-card">
+            <div class="manifiesto-icon-wrapper">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3 class="manifiesto-card-title">Procesamiento Inteligente, No Decisiones Automatizadas</h3>
+            <p class="manifiesto-card-text">La IA lee, clasifica y cruza datos en segundos, pero jamás emite una resolución por sí sola; genera un borrador técnico inalterable listo para la validación y firma del funcionario responsable.</p>
+          </div>
+          
+          <!-- Card 2 -->
+          <div class="manifiesto-card">
+            <div class="manifiesto-icon-wrapper">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 11l2 2 4-4"/></svg>
+            </div>
+            <h3 class="manifiesto-card-title">Cercanía y Transparencia Radical</h3>
+            <p class="manifiesto-card-text">Se terminan los expedientes perdidos. Cada paso que realiza la IA queda registrado en un protocolo de auditoría inalterable que blinda legalmente a la gestión ante cualquier auditoría del tribunal de cuentas.</p>
+          </div>
+          
+          <!-- Card 3 -->
+          <div class="manifiesto-card">
+            <div class="manifiesto-icon-wrapper">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg>
+            </div>
+            <h3 class="manifiesto-card-title">Soberanía y Cuidado del Presupuesto</h3>
+            <p class="manifiesto-card-text">Corre de forma local (en la infraestructura propia de tu municipio o provincia). Los datos de los vecinos están protegidos localmente y no se gastan recursos públicos en licencias dolarizadas del extranjero.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         MOTORES DE IMPACTO TERRITORIAL
+         ========================================== -->
+    <section class="motores">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <h2 class="section-title">Motores de Impacto Territorial</h2>
+          <p class="section-subtitle">Soluciones específicas para las demandas más urgentes de la administración municipal y provincial en Argentina.</p>
+        </div>
+        
+        <div class="motores-tabs-container">
+          <!-- Navegación de pestañas -->
+          <div class="motores-nav">
+            <button class="tab-button active" onclick="cambiarTab(event, 'comercio')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Comercio Activo
+            </button>
+            <button class="tab-button" onclick="cambiarTab(event, 'social')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              Cercanía Social
+            </button>
+            <button class="tab-button" onclick="cambiarTab(event, 'ventanilla')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Ventanilla Ágil
+            </button>
+          </div>
+
+          <!-- Contenido Comercio Activo -->
+          <div id="comercio" class="tab-content active">
+            <div class="motor-info">
+              <div class="motor-info-header">
+                <div class="motor-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3z"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                </div>
+                <h3 class="motor-title">Comercio Activo</h3>
+              </div>
+              <p class="motor-desc">Habilitaciones rápidas que impulsan el comercio de barrio. El comerciante carga los requisitos digitalmente y el motor valida normativas de zonificación al instante.</p>
+              
+              <div class="flow-steps">
+                <div class="flow-step">
+                  <div class="flow-step-num">1</div>
+                  <div>
+                    <h4 class="flow-step-title">Carga Digital</h4>
+                    <p class="flow-step-text">El comerciante sube planos de catastro y certificados desde el portal local.</p>
+                  </div>
+                </div>
+                <div class="flow-step">
+                  <div class="flow-step-num">2</div>
+                  <div>
+                    <h4 class="flow-step-title">Validación del Código Urbano por IA</h4>
+                    <p class="flow-step-text">La IA cruza planos y ordenanzas locales en segundos sin intervención manual.</p>
+                  </div>
+                </div>
+                <div class="flow-step human-gate">
+                  <div class="flow-step-num">3</div>
+                  <div>
+                    <h4 class="flow-step-title">Firma Humana (Human-Gated)</h4>
+                    <p class="flow-step-text">El inspector municipal valida el borrador final e imprime la oblea de habilitación con QR.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="motor-preview-panel">
+              <div class="preview-header">
+                <span class="preview-badge">Vista del Panel Municipal</span>
+                <span style="font-size: 0.8rem; color: var(--accent-light); font-weight: 700;">PROCESADO</span>
+              </div>
+              <div class="preview-item">
+                <div class="preview-item-title">Comercio</div>
+                <div class="preview-item-val">Ferretería "El Tornillo" - Lanús</div>
+              </div>
+              <div class="preview-item">
+                <div class="preview-item-title">Zonificación de Ordenanza Municipal</div>
+                <div class="preview-item-val">Ubicación permitida en Zona R2 (Residencial Mixta)</div>
+              </div>
+              <div class="preview-item">
+                <div class="preview-item-title">Impacto en Tiempos de Habilitación</div>
+                <div class="preview-item-val" style="font-size: 1.15rem; font-weight: 700; color: var(--accent-light);">De 45 días a solo 3 días</div>
+                <div class="preview-comparison-badge">93% de aceleración administrativa</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contenido Cercanía Social -->
+          <div id="social" class="tab-content">
+            <div class="motor-info">
+              <div class="motor-info-header">
+                <div class="motor-icon" style="color: var(--accent); background-color: rgba(5, 150, 105, 0.1);">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                </div>
+                <h3 class="motor-title">Cercanía Social</h3>
+              </div>
+              <p class="motor-desc">Optimiza y transparenta la entrega de subsidios, becas o asistencia local cruzando datos objetivos de vulnerabilidad para priorizar la ayuda urgente.</p>
+              
+              <div class="flow-steps">
+                <div class="flow-step">
+                  <div class="flow-step-num">1</div>
+                  <div>
+                    <h4 class="flow-step-title">Cruce de Bases de Datos</h4>
+                    <p class="flow-step-text">La IA cruza datos locales respetando normativas de protección de datos personales.</p>
+                  </div>
+                </div>
+                <div class="flow-step">
+                  <div class="flow-step-num">2</div>
+                  <div>
+                    <h4 class="flow-step-title">Filtro de Prioridad</h4>
+                    <p class="flow-step-text">Detección de necesidades extremas mediante algoritmos de lógica difusa local.</p>
+                  </div>
+                </div>
+                <div class="flow-step human-gate">
+                  <div class="flow-step-num">3</div>
+                  <div>
+                    <h4 class="flow-step-title">Firma del Secretario de Desarrollo</h4>
+                    <p class="flow-step-text">El secretario aprueba la asignación, firmando el desembolso de fondos.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="motor-preview-panel">
+              <div class="preview-header">
+                <span class="preview-badge">Asistente Social</span>
+                <span style="font-size: 0.8rem; color: var(--warning-light); font-weight: 700;">REQUIERE REVISIÓN</span>
+              </div>
+              <div class="preview-item">
+                <div class="preview-item-title">Programa Social</div>
+                <div class="preview-item-val">Beca Estudiantil Secundaria Municipal</div>
+              </div>
+              <div class="preview-item">
+                <div class="preview-item-title">Score de Prioridad por Vulnerabilidad</div>
+                <div class="preview-item-val" style="color: var(--accent-light);">Alto (Madre soltera, 3 menores a cargo, ingresos informales)</div>
+              </div>
+              <div class="preview-item">
+                <div class="preview-item-title">Transparencia de Otorgamiento</div>
+                <div class="preview-item-val">Protocolo AUDITABLE-2026 generado. Firma del funcionario requerida.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contenido Ventanilla Ágil -->
+          <div id="ventanilla" class="tab-content">
+            <div class="motor-info">
+              <div class="motor-info-header">
+                <div class="motor-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
+                </div>
+                <h3 class="motor-title">Ventanilla Ágil</h3>
+              </div>
+              <p class="motor-desc">Clasificación automática de reclamos urbanos y solicitudes. Reduce cuellos de botella y corrige errores de carga del ciudadano en tiempo real.</p>
+              
+              <div class="flow-steps">
+                <div class="flow-step">
+                  <div class="flow-step-num">1</div>
+                  <div>
+                    <h4 class="flow-step-title">Ingreso de Solicitud</h4>
+                    <p class="flow-step-text">El vecino sube fotos o escribe el reclamo en el chat bot o TAD municipal.</p>
+                  </div>
+                </div>
+                <div class="flow-step">
+                  <div class="flow-step-num">2</div>
+                  <div>
+                    <h4 class="flow-step-title">Categorización Inteligente</h4>
+                    <p class="flow-step-text">La IA clasifica la queja ("Luminaria rota", "Bacheo") y asigna la cuadrilla pertinente.</p>
+                  </div>
+                </div>
+                <div class="flow-step human-gate">
+                  <div class="flow-step-num">3</div>
+                  <div>
+                    <h4 class="flow-step-title">Asignación Final y Cierre</h4>
+                    <p class="flow-step-text">El responsable de obras públicas autoriza la salida de la cuadrilla municipal.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="motor-preview-panel">
+              <div class="preview-header">
+                <span class="preview-badge">Clasificador de Reclamos</span>
+                <span style="font-size: 0.8rem; color: var(--accent-light); font-weight: 700;">DERIVADO</span>
+              </div>
+              <div class="preview-item">
+                <div class="preview-item-title">Texto del Reclamo</div>
+                <div class="preview-item-val">"Se cayó una rama gigante sobre el cable de luz en la calle Belgrano."</div>
+              </div>
+              <div class="preview-item">
+                <div class="preview-item-title">Categoría Sugerida</div>
+                <div class="preview-item-val" style="color: var(--warning-light);">Obras Públicas / Defensa Civil (Urgencia Media)</div>
+              </div>
+              <div class="preview-item">
+                <div class="preview-item-title">Optimización en Rutas</div>
+                <div class="preview-item-val">Asignado automáticamente a Cuadrilla Zona Norte (5 min tras carga).</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         EL CAMINO CRÍTICO: UN PILOTO EN 30 DÍAS
+         ========================================== -->
+    <section class="camino">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <h2 class="section-title">El Camino Crítico: Piloto en 30 Días</h2>
+          <p class="section-subtitle">Implementación de bajo riesgo político y alta velocidad de despliegue en tres fases concretas.</p>
+        </div>
+        
+        <div class="camino-grid">
+          <!-- Paso 1 -->
+          <div class="camino-step">
+            <div class="camino-step-day">Fase 1 (Día 1 al 10)</div>
+            <div class="camino-badge">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <h3 class="camino-step-title">Selección del Desafío</h3>
+            <p class="camino-step-text">Elegimos un trámite crítico que congestione la atención y genere quejas de los vecinos para enfocar la primera prueba de velocidad.</p>
+          </div>
+          
+          <!-- Paso 2 -->
+          <div class="camino-step">
+            <div class="camino-step-day">Fase 2 (Día 11 al 20)</div>
+            <div class="camino-badge">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <h3 class="camino-step-title">Ingesta Legal Local</h3>
+            <p class="camino-step-text">Entrenamos y nutrimos el motor de IA de RaumChance exclusivamente con las ordenanzas, códigos de planeamiento y normativas vigentes en la jurisdicción.</p>
+          </div>
+          
+          <!-- Paso 3 -->
+          <div class="camino-step">
+            <div class="camino-step-day">Fase 3 (Día 21 al 30)</div>
+            <div class="camino-badge">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            </div>
+            <h3 class="camino-step-title">Lanzamiento Testigo</h3>
+            <p class="camino-step-text">Corremos un piloto cerrado con casos reales, midiendo el desplome de los tiempos de espera y ajustando la precisión antes de la expansión general.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         MÉTRICAS DE ÉXITO CIUDADANO
+         ========================================== -->
+    <section class="metricas">
+      <div class="container">
+        <h2 class="metricas-title">Métricas de Éxito Ciudadano</h2>
+        
+        <div class="metricas-grid">
+          <!-- Métrica 1 -->
+          <div class="metricas-card">
+            <div class="metricas-num">-75%</div>
+            <h3 class="metricas-card-title">Tiempo de Espera</h3>
+            <p class="metricas-card-text">Reducción promedio en la resolución de expedientes, habilitaciones y respuestas directas al vecino.</p>
+          </div>
+          
+          <!-- Métrica 2 -->
+          <div class="metricas-card warning">
+            <div class="metricas-num">-80%</div>
+            <h3 class="metricas-card-title">Tasa de Rechazo de Carga</h3>
+            <p class="metricas-card-text">Gracias al asistente inteligente que guía al ciudadano a cargar correctamente los requisitos en el primer intento.</p>
+          </div>
+          
+          <!-- Métrica 3 -->
+          <div class="metricas-card">
+            <div class="metricas-num">100%</div>
+            <h3 class="metricas-card-title">Auditabilidad y Blindaje Técnico</h3>
+            <p class="metricas-card-text">Historial inalterable e incorruptible de cada proceso ejecutado, protegiendo legalmente la transparencia de la gestión.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         CONTACTO Y DIAGNÓSTICO
+         ========================================== -->
+    <section id="contacto" class="cta-final">
+      <div class="container">
+        <div class="cta-final-box">
+          <div>
+            <h2 class="cta-final-title">Acelerá la modernización de tu municipio o provincia.</h2>
+            <p class="cta-final-text">Solicitá hoy mismo un diagnóstico de procesos para evaluar qué trámites podemos automatizar con seguridad.</p>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--accent);"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <span style="font-weight: 500;">Licenciamiento local en pesos (Sin gastos en dólares)</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--accent);"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <span style="font-weight: 500;">Blindaje legal ante Tribunal de Cuentas</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--accent);"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <span style="font-weight: 500;">Integración transparente con sistemas existentes</span>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <!-- Formulario de Diagnóstico -->
+            <form class="cta-form" onsubmit="enviarDiagnostico(event)">
+              <div class="form-group">
+                <label class="form-label" for="nombre">Nombre Completo y Cargo</label>
+                <input class="form-input" type="text" id="nombre" placeholder="Ej. Intendente Juan Pérez / Secretario Modernización" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="jurisdiccion">Municipio o Jurisdicción</label>
+                <input class="form-input" type="text" id="jurisdiccion" placeholder="Ej. Municipio de La Rioja / Quilmes" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="contacto-email">Correo Electrónico Oficial</label>
+                <input class="form-input" type="email" id="contacto-email" placeholder="ejemplo@municipio.gob.ar" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="tramite">Trámite Crítico a Resolver</label>
+                <input class="form-input" type="text" id="tramite" placeholder="Ej. Habilitaciones comerciales / Ayudas Sociales">
+              </div>
+              <button class="btn btn-primary" type="submit" style="width: 100%; margin-top: 10px;">
+                Solicitar Diagnóstico Técnico
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================
+       PIE DE PÁGINA (FOOTER)
+       ========================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-logo">
+          RaumChance <span>KI</span>
+        </div>
+        <p class="footer-tagline">
+          "RaumChance: Construyendo la gestión del futuro con soberanía tecnológica y eficiencia al servicio del ciudadano."
+        </p>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 RaumChance KI. Desarrollado con soberanía y código local para administraciones públicas en Argentina.</span>
+        <span>Tecnología Gubernamental Segura</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       SCRIPT DE INTERACCIÓN DE PRUEBA
+       ========================================== -->
+  <script>
+    // Navegación Interactiva de Motores de Impacto
+    function cambiarTab(event, tabId) {
+      // Remover clases activa de botones
+      const buttons = document.querySelectorAll('.tab-button');
+      buttons.forEach(button => button.classList.remove('active'));
+
+      // Remover clases activa de contenidos
+      const contents = document.querySelectorAll('.tab-content');
+      contents.forEach(content => content.classList.remove('active'));
+
+      // Agregar clase activa al actual
+      event.currentTarget.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    // Simulación de Firma en la tarjeta de Hero
+    function firmarTramite(btn) {
+      const card = btn.closest('.signature-card');
+      const badge = card.querySelector('.signature-badge');
+      const footer = card.querySelector('.signature-card-footer');
+      
+      badge.textContent = "Aprobado y Firmado";
+      badge.style.backgroundColor = "rgba(5, 150, 105, 0.1)";
+      badge.style.color = "var(--accent)";
+      
+      footer.innerHTML = `
+        <div style="color: var(--accent); font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.95rem; padding: 12px 0;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          Resolución Firmada y Notificada
+        </div>
+        <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">Enviado a firma electrónica del Intendente y oblea QR generada.</div>
+      `;
+      
+      // Animación suave de confirmación
+      card.style.transform = "scale(1.03)";
+      setTimeout(() => {
+        card.style.transform = "none";
+      }, 300);
+    }
+
+    // Simulación de Envío de Formulario
+    function enviarDiagnostico(event) {
+      event.preventDefault();
+      alert("¡Muchas gracias! Tu solicitud de diagnóstico ha sido registrada con éxito. Un consultor gubernamental de RaumChance KI se contactará a tu correo oficial en las próximas 24 horas hábiles.");
+      event.target.reset();
+    }
+  </script>
+</body>
+</html>
